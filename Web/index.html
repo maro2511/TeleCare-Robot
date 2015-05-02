@@ -60,8 +60,8 @@
 
         <!-- Heading Row -->
         <div class="row">
-            <div class="col-md-8">
-                <img class="img-responsive img-rounded" src="http://placehold.it/900x350" alt="">
+            <div class="col-md-8" id="videoPlayer">
+
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
@@ -118,17 +118,17 @@
                 <h2>Audio/Video Control</h2>
                 <p>Audio and Video control panel</p>
                 <div class="form-group">
-                    <button id="startVideoBotton" class="btn btn-default">Start Video</button>
-                    <button id="stopVideoBotton" class="btn btn-default">Stop Video</button>
+                    <button id="startVideoButton" class="btn btn-default">Start Video</button>
+                    <button id="stopVideoButton" class="btn btn-default">Stop Video</button>
                 </div>
 
                 <div class="form-group">
-                    <button id="startAudioBotton" class="btn btn-default">Start Audio</button>
-                    <button id="stopAudioBotton" class="btn btn-default">Stop Audio</button>
+                    <button id="startAudioButton" class="btn btn-default">Start Audio</button>
+                    <button id="stopAudioButton" class="btn btn-default">Stop Audio</button>
                 </div>
                 <div class="form-group">
-                    <button id="startMicBotton" class="btn btn-default">Enable mic</button>
-                    <button id="stopMicBotton" class="btn btn-default">Disable mic</button>
+                    <button id="startMicButton" class="btn btn-default">Enable mic</button>
+                    <button id="stopMicButton" class="btn btn-default">Disable mic</button>
                 </div>
             </div>
             <!-- /.col-md-4 -->
@@ -136,12 +136,12 @@
                 <h2 align="center">Move Control</h2>
                 <p align="center">We can guess what this tab does...</p>
                 <div class="form-group" align="center">
-                    <button id="upDirrectionBotton" class="btn btn-default">Up</button>
+                    <button id="upDirectionButton" class="btn btn-default">Up</button>
                 </div>
                 <div class="form-group" align="center">
-                    <button id="leftDirrectionBotton" class="btn btn-default">Left</button>
-                    <button id="downDirrectionBotton" class="btn btn-default">Down</button>
-                    <button id="rightDirrectionBotton" class="btn btn-default">Right</button>
+                    <button id="leftDirectionButton" class="btn btn-default">Left</button>
+                    <button id="downDirectionButton" class="btn btn-default">Down</button>
+                    <button id="rightDirectionButton" class="btn btn-default">Right</button>
                 </div>
 
             </div>
@@ -162,8 +162,9 @@
     <!-- /.container -->
 
     <!-- jQuery -->
-
     <script src="js/jquery.js"></script>
+    <script src="js/jwplayer.js" type="text/javascript"></script>
+    <script>jwplayer.key=""</script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
