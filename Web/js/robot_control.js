@@ -12,7 +12,7 @@ function database_connect(url) {
 function database_retrieve_users(users_ref) {
 
     // Attach an asynchronous callback to read the data at our posts reference
-    users_ref.on("value", function(snapshot) {
+    users_ref.once("value", function(snapshot) {
         for (var key in snapshot.val()) {
             console.log(key);
             $("#robot_id_select").append(
@@ -26,6 +26,23 @@ function database_retrieve_users(users_ref) {
 /*function database_read_response(snapshot) {
 
 }*/
+
+function rtsp_stream_start(url) {
+
+    console.log("Playing video stream from " + url);
+
+    jwplayer("videoPlayer").setup({
+        height: 480,
+        width: 640,
+        file: url,
+        image: "",
+        rtmp: {
+            bufferlength: 3
+        }
+    });
+
+    jwplayer("videoPlayer").play();
+}
 
 function database_connect_to_robot(ref, robot_id) {
     ref.child(robot_id + "/robot_response").set("");
@@ -46,6 +63,7 @@ function database_connect_to_robot(ref, robot_id) {
         }
         if (field === "rtsp_stream_url") {
             rtsp_stream_start(robot_response);
+            ref.child(robot_id + "/rtsp_stream_url").set("");
         }
     });
 
@@ -60,7 +78,7 @@ $(document).ready(function(){
     var ref;
     var users_ref;
 
-    $("#firebaseConnectButton").click(function (){
+    $("#firebaseConnectButton").on("click", function (){
 
         ref = database_connect($("#server_addr").val());
         users_ref = ref.child("users");
@@ -79,16 +97,26 @@ $(document).ready(function(){
 
     }));
 
-    $("#upDirectionButton").click(function (){
+    $("#startVideoButton").on("click", function (){
+        users_ref.child(current_robot + "/server_request").set("START_VIDEO");
+    });
+
+    $("#stopVideoButton").on("click", function (){
+        users_ref.child(current_robot + "/server_request").set("STOP_VIDEO");
+        jwplayer("videoPlayer").stop();
+    });
+
+
+    $("#upDirectionButton").on("click", function (){
         users_ref.child(current_robot + "/server_request").set("GO_FORWARD");
     });
-    $("#leftDirectionButton").click(function (){
+    $("#leftDirectionButton").on("click", function (){
         users_ref.child(current_robot + "/server_request").set("GO_LEFT");
     });
-    $("#downDirectionButton").click(function (){
+    $("#downDirectionButton").on("click", function (){
         users_ref.child(current_robot + "/server_request").set("GO_BACK");
     });
-    $("#rightDirectionButton").click(function (){
+    $("#rightDirectionButton").on("click", function (){
         users_ref.child(current_robot + "/server_request").set("GO_RIGHT");
     });
 
@@ -96,12 +124,11 @@ $(document).ready(function(){
         height: 480,
         width: 640,
         file: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        //file: "",
         image: "img/lev.jpg",
         rtmp: {
             bufferlength: 3
         }
     });
-
-   // jwplayer("videoPlayer").play();
 
 });
