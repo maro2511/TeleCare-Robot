@@ -1,0 +1,65 @@
+    <!-- Page Content -->
+    <div class="container" ng-controller="RobotController as rc">
+
+        <hr>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="well text-center">
+                    Site Under Construction
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Connection</h2>
+
+                <div class="form-group">
+                    <div class="dropdown">
+						<select ng-change="rc.connectToRobot(current_robot)" ng-model="current_robot">
+							<option ng-repeat="current_robot in rc.users" >{{current_robot}}</option>
+						</select>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Firebase Server address" id="server_addr" ng-model="firebase_server">
+                </div>
+
+                <button id="firebaseConnectButton" class="btn btn-default" ng-click="rc.connectToFirebase(firebase_server)">Connect</button>
+
+            </div>
+
+            <div class="col-md-4">
+                <h2>Audio/Video Control</h2>
+                <p>Audio and Video control panel</p>
+                <div class="form-group">
+                    <button id="startVideoButton" class="btn btn-default" ng-click="rc.sendVideoRequest()">Start Video</button>
+                    <button id="stopVideoButton" class="btn btn-default" ng-click="rc.stopVideoRequest()">Stop Video</button>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <h2 align="center">Move Control</h2>
+                <p align="center">We can guess what this tab does...</p>
+                <div class="form-group" align="center">
+                    <button id="upDirectionButton" class="btn btn-default" ng-click="rc.moveRobot('GO_FORWARD')">Up</button>
+                </div>
+                <div class="form-group" align="center">
+                    <button id="leftDirectionButton" class="btn btn-default" ng-click="rc.moveRobot('GO_LEFT')">Left</button>
+                    <button id="downDirectionButton" class="btn btn-default" ng-click="rc.moveRobot('GO_BACK')">Down</button>
+                    <button id="rightDirectionButton" class="btn btn-default" ng-click="rc.moveRobot('GO_RIGHT')">Right</button>
+                </div>
+
+            </div>
+        </div>
+		
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Telecare Robot Website 2015</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
