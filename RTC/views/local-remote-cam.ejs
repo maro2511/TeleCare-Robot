@@ -1,0 +1,32 @@
+<!-- Heading Row -->
+<div class="row">
+    <div class="col-md-8 remoteStreams" ng-controller="RemoteStreamsController as rtc">
+        <div id="remoteVideosContainer"></div>
+
+        <table>
+            <tbody>
+            <tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
+                <td><a>{{stream.name}}</a></td>
+                <td ng-click="rtc.view(stream)"><a>View</a></td>
+                <td ng-click="rtc.call(stream)"><a>Call</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.col-md-8 -->
+    <div class="col-md-4 localStream" ng-controller="LocalStreamController as localStream">
+        <h1>Local Video</h1>
+        <video id="localVideo" muted="muted" autoplay="true" width="100%"></video>
+        <li ng-click="localStream.toggleCam()">
+            <a href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a>
+        </li>
+        <div ng-show="localStream.cameraIsOn">
+            <p><%= share %></p>
+            <a>{{ localStream.link }}</a>
+        </div>
+    </div>
+    <!-- /.col-md-4 -->
+</div>
+<!-- /.row -->
+

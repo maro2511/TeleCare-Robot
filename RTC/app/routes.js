@@ -7,7 +7,7 @@ module.exports = function(app, streams) {
                           header: 'WebRTC live streaming',
                           username: 'Username',
                           share: 'You can start video stream now!',
-                          footer: 'Ariel, Sergey and Tamir',
+                          footer: 'a',
                           id: req.params.id
                         });
   };
