@@ -158,7 +158,7 @@
 		};
 	}]);
 	
-	app.controller('RobotController', function($scope) {
+	app.controller('RobotController', function($scope, $window) {
 		var rc = this;
 		rc.firebaseRef = {};
 		rc.firabaseUsersRef = {};
@@ -196,6 +196,7 @@
 			});
 
 			rc.firabaseUsersRef.child(rc.currentRobot + "/server_request").set("ISSUE_CONNECTION");
+			rc.firabaseUsersRef.child(rc.currentRobot + "/host_ip").set($window.location.host);
 			
 			console.log("Connected to: " + rc.currentRobot);	
 		}
