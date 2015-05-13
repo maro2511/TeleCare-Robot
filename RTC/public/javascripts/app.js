@@ -216,6 +216,7 @@
 		rc.connectToFirebase = function(addr){
 			console.log("Firebase addr = " + addr);
 			rc.firebaseRef = new Firebase(addr);
+			rc.firabaseRef.child("host_ip").set($window.location.host);
 			rc.firabaseUsersRef = rc.firebaseRef.child("users");
 			rc.databaseRetrieveUsers(rc.firabaseUsersRef);
 		};
