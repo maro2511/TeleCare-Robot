@@ -161,42 +161,42 @@
 	app.controller('RobotController', function($scope, $window) {
 		var rc = this;
 		rc.firebaseRef = {};
-		rc.firabaseUsersRef = {};
+		rc.firebaseUsersRef = {};
 		rc.users = [];
 		rc.currentRobot = 0;
 
 		rc.connectToRobot = function(robot){
 			rc.currentRobot = robot;
 			
-			rc.firabaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
-			rc.firabaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
+			rc.firebaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
+			rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
 
-			rc.firabaseUsersRef.child(rc.currentRobot).on("child_changed", function(snapshot) {
+			rc.firebaseUsersRef.child(rc.currentRobot).on("child_changed", function(snapshot) {
 				var field = snapshot.key();
 				var robot_response = snapshot.val();
 				if (field === "robot_response") {
 					if (robot_response === "CONNECTION_OK") {
-						rc.firabaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
+						rc.firebaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
 						console.log("Successfully connected to id = " + rc.currentRobot);
 					}
 					if (robot_response === "MOVEMENT_OK") {
-						rc.firabaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
+						rc.firebaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
 						console.log("Successfully performed movement");
 					}
 				}
 				if (field === "rtsp_stream_url") {
 					if (robot_response !== "") {
 						console.log("Emitting event to start video call to url = " + robot_response);
-						rc.firabaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
+						rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
 						$scope.$emit('startVideoCall', robot_response);
 						//rtsp_stream_start(robot_response);
-						//rc.firabaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
+						//rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
 					}
 				}
 			});
 
-			rc.firabaseUsersRef.child(rc.currentRobot + "/server_request").set("ISSUE_CONNECTION");
-			rc.firabaseUsersRef.child(rc.currentRobot + "/host_ip").set($window.location.host);
+			rc.firebaseUsersRef.child(rc.currentRobot + "/server_request").set("ISSUE_CONNECTION");
+			rc.firebaseUsersRef.child(rc.currentRobot + "/host_ip").set($window.location.host);
 			
 			console.log("Connected to: " + rc.currentRobot);	
 		}
@@ -216,22 +216,22 @@
 		rc.connectToFirebase = function(addr){
 			console.log("Firebase addr = " + addr);
 			rc.firebaseRef = new Firebase(addr);
-			rc.firabaseRef.child("host_ip").set($window.location.host);
-			rc.firabaseUsersRef = rc.firebaseRef.child("users");
-			rc.databaseRetrieveUsers(rc.firabaseUsersRef);
+			rc.firebaseRef.child("host_ip").set($window.location.host);
+			rc.firebaseUsersRef = rc.firebaseRef.child("users");
+			rc.databaseRetrieveUsers(rc.firebaseUsersRef);
 		};
 		
 		rc.moveRobot = function(dir){
-			rc.firabaseUsersRef.child(rc.currentRobot + "/server_request").set(dir);
+			rc.firebaseUsersRef.child(rc.currentRobot + "/server_request").set(dir);
 		};
 		
 		rc.sendVideoRequest = function(){
-			//rc.firabaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set(rtcStreamLink);
+			//rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set(rtcStreamLink);
 			//console.log("Stream link = " + rtcStreamLink);
 		}
 		
 		rc.stopVideoRequest = function(){
-			//rc.firabaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
+			//rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
 		}
 	});
 	
