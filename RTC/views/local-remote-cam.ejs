@@ -3,7 +3,7 @@
     <div class="col-md-8 remoteStreams" ng-controller="RemoteStreamsController as rtc">
         <h1>Remote Video</h1>
         <div id="remoteVideosContainer"></div>
-
+<!--
         <table>
             <tbody>
             <tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
@@ -13,7 +13,7 @@
             </tr>
             </tbody>
         </table>
-
+-->
     </div>
     <!-- /.col-md-8 -->
     <div class="col-md-4 localStream" ng-controller="LocalStreamController as localStream">
@@ -22,10 +22,12 @@
         <li ng-click="localStream.toggleCam()">
             <a href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a>
         </li>
+		<!--
         <div ng-show="localStream.cameraIsOn">
             <p><%= share %></p>
             <a>{{ localStream.link }}</a>
         </div>
+		-->
     </div>
     <!-- /.col-md-4 -->
 </div>
