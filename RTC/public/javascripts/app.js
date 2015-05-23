@@ -42,7 +42,7 @@
 		return camera;
     }]);
 
-	app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$scope', function(camera, $location, $http, $scope){
+	app.controller('RemoteStreamsController', ['camera', '$location', '$http', '$rootScope', function(camera, $location, $http, $rootScope){
 		var rtc = this;
 		rtc.remoteStreams = [];
 		function getStreamById(id) {
@@ -104,7 +104,7 @@
 				});
 			}
 		};
-
+		
 		//initial load
 		rtc.loadData();
     	if($location.url() != '/'){
@@ -112,10 +112,12 @@
       		rtc.call($location.url().slice(1));
     	};
 		
-		$scope.$on('startVideoCall', function(event, url) {
-			console.log("Starting video call to id = " + url.split("/")[1]);
-      		rtc.call(url.split("/")[1]);
+
+		$rootScope.$on('startVideoCall', function(event, url) {
+			console.log("Starting video call to url = " + url + " id = " + url.split("/")[3]);
+      		rtc.call(url.split("/")[3]);
 		});
+		
 	}]);
 
 	
@@ -158,7 +160,7 @@
 		};
 	}]);
 	
-	app.controller('RobotController', function($scope, $window) {
+	app.controller('RobotController', function($rootScope, $scope, $window) {
 		var rc = this;
 		rc.firebaseRef = {};
 		rc.firebaseUsersRef = {};
@@ -188,7 +190,8 @@
 					if (robot_response !== "") {
 						console.log("Emitting event to start video call to url = " + robot_response);
 						rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
-						$scope.$emit('startVideoCall', robot_response);
+						$rootScope.$emit('startVideoCall', robot_response);
+						
 						//rtsp_stream_start(robot_response);
 						//rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
 					}
@@ -207,6 +210,7 @@
 				for (var key in snapshot.val()) {
 					console.log(key);
 					rc.users[rc.users.length] = key;
+					rc.firebaseUsersRef.child(key + "/server_request").set("");
 				}
 				$scope.$apply();
 				
