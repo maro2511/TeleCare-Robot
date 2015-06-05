@@ -1,6 +1,3 @@
-/**
- * Created by Sergey on 01/05/2015.
- */
 
 function database_connect(url) {
 
@@ -22,10 +19,6 @@ function database_retrieve_users(users_ref) {
         }
     });
 }
-
-/*function database_read_response(snapshot) {
-
-}*/
 
 function rtsp_stream_start(url) {
 
@@ -119,6 +112,9 @@ $(document).ready(function(){
     $("#rightDirectionButton").on("click", function (){
         users_ref.child(current_robot + "/server_request").set("GO_RIGHT");
     });
+    $("#returnToBaseButton").on("click", function (){
+        users_ref.child(current_robot + "/server_request").set("RETURN_TO_BASE");
+    });
 
 
     navigator.getUserMedia ||
@@ -153,16 +149,5 @@ $(document).ready(function(){
     } else {
         alert('getUserMedia is not supported in this browser.');
     }
-
-    /*jwplayer("videoPlayer").setup({
-        height: 480,
-        width: 640,
-        //file: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        file: vid_url,
-        image: "img/lev.jpg",
-        rtmp: {
-            bufferlength: 3
-        }
-    });*/
 
 });

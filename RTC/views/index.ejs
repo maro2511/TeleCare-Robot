@@ -19,11 +19,135 @@
 <body>
 
 <div class="container">
-<%= include prvHeader %>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
 
-<%= include local-remote-cam %>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">About</a></li>
+                    <li><img src="/img/logo2.JPG" height="50px"></li>
+                    <li><img src="/img/logo1.JPG" height="50px"></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- /.Navigation -->
 
-<%= include controller %>
+    <!-- Heading Row -->
+    <div class="row">
+        <div class="col-md-8 remoteStreams" ng-controller="RemoteStreamsController as rtc">
+            <h1>Remote Video</h1>
+
+            <div id="remoteVideosContainer"></div>
+        </div>
+        <!-- /.col-md-8 -->
+
+        <!-- col-md-4 -->
+        <div class="col-md-4 localStream" ng-controller="LocalStreamController as localStream">
+            <h1>Local Video</h1>
+            <video id="localVideo" muted="muted" autoplay="true" width="100%"></video>
+            <button ng-click="localStream.toggleCam()" class="btn btn-default" style="width: 100%">{{
+                localStream.cameraIsOn ? 'Stop' : 'Start' }}
+            </button>
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+    <!-- /.Heading Row -->
+
+
+    <div class="container" ng-controller="RobotController as rc">
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Connection</h2>
+
+                <div class="form-group">
+                    <div class="dropdown">
+                        <select class="btn btn-default" ng-change="rc.connectToRobot(current_robot)"
+                                ng-model="current_robot">
+                            <option ng-repeat="current_robot in rc.users">{{current_robot}}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Firebase Server address" id="server_addr"
+                           ng-model="firebase_server"
+                           ng-init="firebase_server='https://torrid-heat-7030.firebaseio.com/'">
+                </div>
+
+                <button id="firebaseConnectButton" class="btn btn-default"
+                        ng-click="rc.connectToFirebase(firebase_server)">Connect
+                </button>
+
+            </div>
+
+            <div class="col-md-4">
+                <h2 align="center">Move Control</h2>
+
+                <div class="form-group" align="center">
+                    <button id="upDirectionButton" class="btn btn-default" ng-click="rc.moveRobot('GO_FORWARD')">
+                        Forward
+                    </button>
+                </div>
+                <div class="form-group" align="center">
+                    <button id="leftDirectionButton" class="btn btn-default" ng-click="rc.moveRobot('GO_LEFT')">Left
+                    </button>
+                    <button id="downDirectionButton" class="btn btn-default" ng-click="rc.moveRobot('GO_BACK')">Back
+                    </button>
+                    <button id="rightDirectionButton" class="btn btn-default" ng-click="rc.moveRobot('GO_RIGHT')">
+                        Right
+                    </button>
+                </div>
+                <div class="form-group" align="center">
+                    <button style="width: 100%" id="returnToBaseButton" class="btn btn-default"
+                            ng-click="rc.moveRobot('RETURN_TO_BASE')">Return to base
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <h2 align="center">Robot Terminal</h2>
+
+                <div class="form-group" align="center">
+                    <textarea readonly id="RobotTxtArea" rows="7" style="width: 100%" class="input-group"></textarea>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <br>
+
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Telecare Robot Website 2015</p>
+            </div>
+        </div>
+    </footer>
+
 </div>
 </body>
 </html>
