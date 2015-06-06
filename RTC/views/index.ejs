@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Firebase Server address" id="server_addr"
                            ng-model="firebase_server"
-                           ng-init="firebase_server='https://torrid-heat-7030.firebaseio.com/'">
+                           ng-init="firebase_server='https://crackling-heat-6629.firebaseio.com/'">
                 </div>
 
                 <button id="firebaseConnectButton" class="btn btn-default"
@@ -130,7 +130,7 @@
                 <h2 align="center">Robot Terminal</h2>
 
                 <div class="form-group" align="center">
-                    <textarea readonly id="RobotTxtArea" rows="7" style="width: 100%" class="input-group"></textarea>
+                    <textarea readonly id="RobotTxtArea" rows="7" style="width: 100%" class="input-group" ng-model="robot_log"></textarea>
                 </div>
             </div>
         </div>
