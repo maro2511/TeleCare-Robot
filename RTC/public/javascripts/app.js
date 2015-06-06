@@ -166,6 +166,7 @@
 		rc.firebaseUsersRef = {};
 		rc.users = [];
 		rc.currentRobot = 0;
+		rc.message_log = [];
 
 		rc.connectToRobot = function(robot){
 			rc.currentRobot = robot;
@@ -196,6 +197,16 @@
 						//rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
 					}
 				}
+				if (field === "bluetooth") {
+					rc.message_log[rc.message_log.length] = robot_response + "\n";
+					console.log("Received bluetooth signal " + rc.message_log[rc.message_log.length - 1]);
+					var list_to_string = "";
+					for (var i in rc.message_log) {
+						list_to_string += rc.message_log[rc.message_log.length - 1 - i];
+					}
+					$scope.robot_log = list_to_string;
+					$scope.$apply();
+				}
 			});
 
 			rc.firebaseUsersRef.child(rc.currentRobot + "/server_request").set("ISSUE_CONNECTION");
@@ -220,6 +231,20 @@
 		rc.connectToFirebase = function(addr){
 			console.log("Firebase addr = " + addr);
 			rc.firebaseRef = new Firebase(addr);
+			
+			function authHandler(error, authData) {
+				if (error) {
+					console.log("Login Failed!", error);
+				} else {
+					console.log("Authenticated successfully with payload:", authData);
+				}
+			}
+
+			rc.firebaseRef.authWithPassword({
+			  email    : 'tele-care@gmail.com',
+			  password : '12345678'
+			}, authHandler);
+			
 			rc.firebaseRef.child("host_ip").set($window.location.host);
 			rc.firebaseUsersRef = rc.firebaseRef.child("users");
 			rc.databaseRetrieveUsers(rc.firebaseUsersRef);
