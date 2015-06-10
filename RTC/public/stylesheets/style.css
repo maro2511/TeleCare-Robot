@@ -32,6 +32,13 @@ table, tr, td, th {margin: 0;border: 0;padding: 5px;border-collapse: collapse;}
   text-align: center;
 }
 
+.remoteStreams video {
+    border: 5px solid rgb(119, 119, 119);
+    outline: 0px none;
+    height: 360px;
+    width: 480px;
+}
+
 .remoteStreams td:hover {
   cursor: pointer;
   background-color: #aaa;
