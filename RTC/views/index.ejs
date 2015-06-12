@@ -130,23 +130,34 @@
                 <h2 align="center">Robot Terminal</h2>
 
                 <div class="form-group" align="center">
-                    <textarea readonly id="RobotTxtArea" rows="7" style="width: 100%" class="input-group" ng-model="robot_log"></textarea>
+                    <textarea readonly id="RobotTxtArea" rows="5" style="width: 100%" class="input-group"
+                              ng-model="robot_log"></textarea>
+                </div>
+                <div>
+                    Custom cmd:
+                    <input type="text" id="cmd1" size="1" maxlength="1">
+                    <input type="text" id="cmd2" size="1" maxlength="1">
+                    <input type="text" id="cmd3" size="1" maxlength="1">
+                    <input type="text" id="cmd4" size="1" maxlength="1">
+                    <button id="sendCmd" class="btn btn-default" style="width: 70px">Send
+                    </button>
                 </div>
             </div>
         </div>
-
-
     </div>
 
-    <br>
 
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <p>Copyright &copy; Telecare Robot Website 2015</p>
-            </div>
+</div>
+
+<br>
+
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Copyright &copy; Telecare Robot Website 2015</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
 </div>
 </body>
