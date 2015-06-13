@@ -135,11 +135,12 @@
                 </div>
                 <div>
                     Custom cmd:
-                    <input type="text" id="cmd1" size="1" maxlength="1">
-                    <input type="text" id="cmd2" size="1" maxlength="1">
-                    <input type="text" id="cmd3" size="1" maxlength="1">
-                    <input type="text" id="cmd4" size="1" maxlength="1">
-                    <button id="sendCmd" class="btn btn-default" style="width: 70px">Send
+                    <input type="text" id="chr" size="1" maxlength="1" ng-model="chr">
+                    <input type="text" id="cmd1" size="1" maxlength="1" ng-model="cmd1">
+                    <input type="text" id="cmd2" size="1" maxlength="1" ng-model="cmd2">
+                    <input type="text" id="cmd3" size="1" maxlength="1" ng-model="cmd3">
+                    <button id="sendCmd" class="btn btn-default" style="width: 70px" ng-click="rc.sendCommand(chr, cmd1, cmd2, cmd3)">
+						Send
                     </button>
                 </div>
             </div>

@@ -186,6 +186,10 @@
 						rc.firebaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
 						console.log("Successfully performed movement");
 					}
+					if (robot_response === "GET_DATA_OK") {
+						rc.firebaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
+						console.log("Successfully received custom command");
+					}
 				}
 				if (field === "rtsp_stream_url") {
 					if (robot_response !== "") {
@@ -252,6 +256,15 @@
 		
 		rc.moveRobot = function(dir){
 			rc.firebaseUsersRef.child(rc.currentRobot + "/server_request").set(dir);
+		};
+		
+		rc.sendCommand = function(chr, cmd1, cmd2, cmd3) {
+			console.log("Sending command = " + chr + " " + cmd1 + " " + cmd2 + " " + cmd3);
+			rc.firebaseUsersRef.child(rc.currentRobot + "/char").set(chr);
+			rc.firebaseUsersRef.child(rc.currentRobot + "/number1").set(cmd1);
+			rc.firebaseUsersRef.child(rc.currentRobot + "/number2").set(cmd2);
+			rc.firebaseUsersRef.child(rc.currentRobot + "/number3").set(cmd3);
+			rc.firebaseUsersRef.child(rc.currentRobot + "/server_request").set("GET_DATA");
 		};
 		
 		rc.sendVideoRequest = function(){
