@@ -269,6 +269,7 @@
 			rc.firebaseUsersRef.child(rc.currentRobot + "/server_request").set("GET_DATA");
 		};
 		
+		
 		rc.sendVideoRequest = function(){
 			//rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set(rtcStreamLink);
 			//console.log("Stream link = " + rtcStreamLink);
