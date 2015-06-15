@@ -180,10 +180,12 @@
 				if (field === "robot_response") {
 					if (robot_response === "CONNECTION_OK") {
 						rc.firebaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
+						rc.firebaseUsersRef.child(rc.currentRobot + "/server_request").set("");
 						console.log("Successfully connected to id = " + rc.currentRobot);
 					}
 					if (robot_response === "MOVEMENT_OK") {
 						rc.firebaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
+						rc.firebaseUsersRef.child(rc.currentRobot + "/server_request").set("");
 						console.log("Successfully performed movement");
 					}
 					if (robot_response === "GET_DATA_OK") {
