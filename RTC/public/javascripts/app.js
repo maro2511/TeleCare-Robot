@@ -224,11 +224,14 @@
 		rc.databaseRetrieveUsers = function(users_ref){
 			users_ref.once("value", function(snapshot) {
 
+				rc.users.length = 0;
 				for (var key in snapshot.val()) {
 					console.log(key);
 					rc.users[rc.users.length] = key;
 					rc.firebaseUsersRef.child(key + "/server_request").set("");
 				}
+				
+				$scope.robot_list = rc.users;
 				$scope.$apply();
 				
 			});

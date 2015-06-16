@@ -83,8 +83,9 @@
                 <div class="form-group">
                     <div class="dropdown">
                         <select class="btn btn-default" ng-change="rc.connectToRobot(current_robot)"
-                                ng-model="current_robot">
-                            <option ng-repeat="current_robot in rc.users">{{current_robot}}</option>
+                                ng-model="current_robot" ng-options="item for item in robot_list">
+                            <!-- <option ng-repeat="current_robot in rc.users">{{current_robot}}</option> -->
+							<option value="">Select Robot ID</option>
                         </select>
                     </div>
 
