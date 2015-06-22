@@ -174,6 +174,7 @@
 			
 			rc.firebaseUsersRef.child(rc.currentRobot + "/robot_response").set("");
 			rc.firebaseUsersRef.child(rc.currentRobot + "/rtsp_stream_url").set("");
+			rc.firebaseUsersRef.child(rc.currentRobot + "/signal").set("");
 
 			rc.firebaseUsersRef.child(rc.currentRobot).on("child_changed", function(snapshot) {
 				var field = snapshot.key();
