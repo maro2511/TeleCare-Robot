@@ -124,9 +124,10 @@
                             ng-click="rc.moveRobot('GO_STOP')">Stop
                     </button>
                 </div>
-                <div class="alert alert-success" role="alert">Robot signal is excellent!</div>
-                <div class="alert alert-warning" role="alert">Robot signal is good</div>
-                <div class="alert alert-danger" role="alert">Bad or no signal, returning to base!</div>
+                <div class="alert alert-success" ng-hide="(rc.signalStrength != 4)" ng-show="(rc.signalStrength == 4)" role="alert">Robot signal is excellent!</div>
+                <div class="alert alert-warning" ng-hide="(rc.signalStrength != 3)" ng-show="(rc.signalStrength == 3)" role="alert">Robot signal is good</div>
+                <div class="alert alert-danger"  ng-hide="(rc.signalStrength != 2 && rc.signalStrength != 1)" 
+					ng-show="(rc.signalStrength == 2 || rc.signalStrength == 1)" role="alert">Bad or no signal, returning to base!</div>
 
 
             </div>

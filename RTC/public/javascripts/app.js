@@ -167,6 +167,7 @@
 		rc.users = [];
 		rc.currentRobot = 0;
 		rc.message_log = [];
+		rc.signalStrength = 0;
 
 		rc.connectToRobot = function(robot){
 			rc.currentRobot = robot;
@@ -211,6 +212,15 @@
 						list_to_string += rc.message_log[rc.message_log.length - 1 - i];
 					}
 					$scope.robot_log = list_to_string;
+					$scope.$apply();
+				}
+				if (field === "signal" || field === "Signal") {
+					console.log("Received WiFi strength signal = " + robot_response);
+					rc.signalStrength = robot_response;
+					if (rc.signalStrength == 1 || rc.signalStrength == 2) {
+						console.log("Bad signal, sending RETURN_TO_BASE command!");
+						rc.moveRobot('RETURN_TO_BASE');
+					}
 					$scope.$apply();
 				}
 			});
