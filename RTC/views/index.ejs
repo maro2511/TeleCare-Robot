@@ -120,10 +120,14 @@
                     </button>
                 </div>
                 <div class="form-group" align="center">
-                    <button style="width: 100%" id="returnToBaseButton" class="btn btn-default"
-                            ng-click="rc.moveRobot('RETURN_TO_BASE')">Return to base
+                    <button style="width: 100%" id="stopButton" class="btn btn-default"
+                            ng-click="rc.moveRobot('GO_STOP')">Stop
                     </button>
                 </div>
+                <div class="alert alert-success" role="alert">Robot signal is excellent!</div>
+                <div class="alert alert-warning" role="alert">Robot signal is good</div>
+                <div class="alert alert-danger" role="alert">Bad or no signal, returning to base!</div>
+
 
             </div>
 
@@ -143,6 +147,13 @@
                     <button id="sendCmd" class="btn btn-default" style="width: 70px" ng-click="rc.sendCommand(chr, cmd1, cmd2, cmd3)">
 						Send
                     </button>
+                </div>
+                <br>
+                <div class="form-group" align="center">
+                    <button style="width: 100%" id="returnToBaseButton" class="btn btn-default"
+                            ng-click="rc.moveRobot('RETURN_TO_BASE')">Return to base
+                    </button>
+                </div>
                 </div>
             </div>
         </div>
